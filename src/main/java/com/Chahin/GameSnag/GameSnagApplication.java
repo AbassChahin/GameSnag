@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
 
-// TODO: Figure out why Get Requests on the game name keep returning null
+// TODO: Better checks on REST API Requests
 
 @SpringBootApplication(exclude = MongoAutoConfiguration.class)
 public class GameSnagApplication {

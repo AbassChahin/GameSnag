@@ -1,6 +1,6 @@
 package com.Chahin.GameSnag.Service;
 
-import com.Chahin.GameSnag.Entities.GameSnag;
+import com.Chahin.GameSnag.Entities.Game;
 import com.Chahin.GameSnag.Repository.GameSnagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,33 @@ public class GameSnagService {
         this.gameSnagRepository =  gameSnagRepository;
     }
 
-    public GameSnag getGame(String gameName) {
+    // Create
+    public Game addGame(Game game) {
+        return gameSnagRepository.save(game);
+    }
+
+    // Read
+    public Game getGameByName(String gameName) {
         return gameSnagRepository.findByName(gameName);
     }
 
-    public List<GameSnag> getSalePrice(double salePrice) {
+    public List<Game> getAllGames() {
+        return gameSnagRepository.findAll();
+    }
+
+    public List<Game> getSalePrice(double salePrice) {
         return gameSnagRepository.findAll().stream()
-                .filter( gameSnag -> gameSnag.getSalePrice() == salePrice)
+                .filter(game -> game.getSalePrice() == salePrice)
                 .collect(Collectors.toList());
+    }
+
+    // Update
+    public Game updateGameByName(Game game) {
+        return gameSnagRepository.save(game);
+    }
+
+    // Delete
+    public Game deleteGameByName(String name) {
+        return gameSnagRepository.deleteByName(name);
     }
 }

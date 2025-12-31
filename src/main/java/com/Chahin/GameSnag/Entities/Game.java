@@ -1,13 +1,19 @@
 package com.Chahin.GameSnag.Entities;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@TypeAlias("Game")
 @Document(collection = "GameSnag")
-public class GameSnag {
+public class Game {
 
     @Id
+    @Field("_id")
+    private ObjectId _id;
+
     @Field("Name")
     private String name;
 
@@ -20,10 +26,18 @@ public class GameSnag {
     @Field("SaleDates")
     private String saleDates;
 
-    public GameSnag() {
+    public Game() {
     }
 
-    public GameSnag(String name, float originalPrice, float salePrice, String saleDates) {
+    public Game(String name, float originalPrice, float salePrice, String saleDates) {
+        this.name = name;
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.saleDates = saleDates;
+    }
+
+    public Game(ObjectId _id, String name, double originalPrice, double salePrice, String saleDates) {
+        this._id = _id;
         this.name = name;
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
@@ -42,7 +56,7 @@ public class GameSnag {
         return originalPrice;
     }
 
-    public void setOriginalPrice(float originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
@@ -50,7 +64,7 @@ public class GameSnag {
         return salePrice;
     }
 
-    public void setSalePrice(float salePrice) {
+    public void setSalePrice(double salePrice) {
         this.salePrice = salePrice;
     }
 
@@ -64,6 +78,6 @@ public class GameSnag {
 
     @Override
     public String toString() {
-        return "Game: " + name + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nSale Dates: " + saleDates;
+        return "Name: " + name + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nSale Dates: " + saleDates;
     }
 }
