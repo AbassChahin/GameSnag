@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
 
-// TODO: Better checks on REST API Requests
+// TODO: Better checks on REST API Requests + Scraping
 
 @SpringBootApplication(exclude = MongoAutoConfiguration.class)
 public class GameSnagApplication {
