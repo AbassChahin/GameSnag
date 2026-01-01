@@ -1,5 +1,6 @@
 package com.Chahin.GameSnag;
 
+import com.Chahin.GameSnag.Utils.EpicGamesScraper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration;
@@ -11,5 +12,6 @@ public class GameSnagApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GameSnagApplication.class, args);
+		EpicGamesScraper.scrapeEpicGames();
 	}
 }
