@@ -7,8 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface GameSnagRepository extends MongoRepository<Game, ObjectId> {
-
-    Game findByName(String name);
-    Game deleteByName(String name);
+    Game findByTitle(String title);
+    Game deleteByTitle(String title);
     List<Game> findBySalePrice(double salePrice);
 }

@@ -24,8 +24,8 @@ public class GameSnagService {
     }
 
     // Read
-    public Game getGameByName(String gameName) {
-        return gameSnagRepository.findByName(gameName);
+    public Game getGameByTitle(String gameName) {
+        return gameSnagRepository.findByTitle(gameName);
     }
 
     public List<Game> getAllGames() {
@@ -39,12 +39,12 @@ public class GameSnagService {
     }
 
     // Update
-    public Game updateGameByName(Game game) {
+    public Game updateGameByTitle(Game game) {
         return gameSnagRepository.save(game);
     }
 
     // Delete
-    public Game deleteGameByName(String name) {
-        return gameSnagRepository.deleteByName(name);
+    public Game deleteGameByTitle(String name) {
+        return gameSnagRepository.deleteByTitle(name);
     }
 }

@@ -14,8 +14,8 @@ public class Game {
     @Field("_id")
     private ObjectId _id;
 
-    @Field("Name")
-    private String name;
+    @Field("Title")
+    private String title;
 
     @Field("OriginalPrice")
     private double originalPrice;
@@ -26,30 +26,35 @@ public class Game {
     @Field("SaleDates")
     private String saleDates;
 
+    @Field("ImagePath")
+    private String imagePath;
+
     public Game() {
     }
 
-    public Game(String name, float originalPrice, float salePrice, String saleDates) {
-        this.name = name;
+    public Game(String title, double originalPrice, double salePrice, String saleDates, String imagePath) {
+        this.title = title;
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
         this.saleDates = saleDates;
+        this.imagePath = imagePath;
     }
 
-    public Game(ObjectId _id, String name, double originalPrice, double salePrice, String saleDates) {
+    public Game(ObjectId _id, String title, double originalPrice, double salePrice, String saleDates, String imagePath) {
         this._id = _id;
-        this.name = name;
+        this.title = title;
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
         this.saleDates = saleDates;
+        this.imagePath = imagePath;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public double getOriginalPrice() {
@@ -76,8 +81,12 @@ public class Game {
         this.saleDates = saleDates;
     }
 
+    public String getImagePath() {return imagePath;}
+
+    public void setImagePath(String imagePath) {this.imagePath = imagePath;}
+
     @Override
     public String toString() {
-        return "Name: " + name + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nSale Dates: " + saleDates;
+        return "Title: " + title + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nSale Dates: " + saleDates + "\nImage Path: " + imagePath;
     }
 }

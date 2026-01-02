@@ -2,7 +2,6 @@ package com.Chahin.GameSnag.Controller;
 
 import com.Chahin.GameSnag.Entities.Game;
 import com.Chahin.GameSnag.Service.GameSnagService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Allow CORS for testing purposes locally
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api/v1/game")
 public class GameSnagController {
@@ -29,9 +30,9 @@ public class GameSnagController {
 
     // Read
     @GetMapping
-    public Game getGameSnag(@RequestParam String name) {
-        if (name != null) {
-            Game game = gameSnagService.getGameByName(name);
+    public Game getGame(@RequestParam String title) {
+        if (title != null) {
+            Game game = gameSnagService.getGameByTitle(title);
             System.out.println("[GET REQUEST] - Retrieving Game:\n" + game);
             return game;
         } else {
@@ -51,19 +52,20 @@ public class GameSnagController {
 
     // Update
     @PutMapping("/update")
-    public ResponseEntity<Game> updateGame(@RequestParam String name, @RequestBody Game updatedGame) {
+    public ResponseEntity<Game> updateGame(@RequestParam String title, @RequestBody Game updatedGame) {
         // Get current game
-        Game prevGame = gameSnagService.getGameByName(name);
-        Game game = gameSnagService.getGameByName(name);
+        Game prevGame = gameSnagService.getGameByTitle(title);
+        Game game = gameSnagService.getGameByTitle(title);
 
         // Update game
-        game.setName(updatedGame.getName());
+        game.setTitle(updatedGame.getTitle());
         game.setSaleDates(updatedGame.getSaleDates());
         game.setOriginalPrice(updatedGame.getOriginalPrice());
         game.setSalePrice(updatedGame.getSalePrice());
+        game.setImagePath(updatedGame.getImagePath());
 
         // Save game
-        Game newGame = gameSnagService.updateGameByName(game);
+        Game newGame = gameSnagService.updateGameByTitle(game);
 
         System.out.println("[PUT REQUEST] - Game Successfully Updated\n\nFrom:\n" + prevGame + "\n\nTo:\n" + newGame);
 
@@ -72,9 +74,9 @@ public class GameSnagController {
 
     // Delete
     @DeleteMapping("/delete")
-    public ResponseEntity<Game> deleteGame(@RequestParam String name) {
-        Game game = gameSnagService.getGameByName(name);
-        gameSnagService.deleteGameByName(name);
+    public ResponseEntity<Game> deleteGame(@RequestParam String title) {
+        Game game = gameSnagService.getGameByTitle(title);
+        gameSnagService.deleteGameByTitle(title);
         System.out.println("[DELETE REQUEST] - Game Successfully Deleted:\n" + game);
         return new ResponseEntity<>(game, HttpStatus.OK);
     }
