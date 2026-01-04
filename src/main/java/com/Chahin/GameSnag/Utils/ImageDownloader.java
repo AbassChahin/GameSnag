@@ -12,7 +12,7 @@ public class ImageDownloader {
     public static String downloadImage(String imageUrl, String fileName) {
 
         try (InputStream in = new URL(imageUrl).openStream()) {
-            Path folder = Paths.get("src/main/resources/static/images/games");
+            Path folder = Paths.get("./images/games");
             if (!Files.exists(folder)) {
                 Files.createDirectories(folder);
             }
