@@ -80,7 +80,6 @@ public class EpicGamesScraper {
                 // full file name & remove special characters from title
                 String cleanTitle = title.replaceAll("[^a-zA-Z0-9._-]", "_");
 
-
                 String fileName = cleanTitle + fileExtension;
 
                 // download image locally and get specific path

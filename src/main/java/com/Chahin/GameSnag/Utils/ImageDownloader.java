@@ -16,6 +16,7 @@ public class ImageDownloader {
                 Files.createDirectories(folder);
             }
 
+            fileName = fileName.replaceAll("[^a-zA-Z0-9._-]", "_");
             Path filePath = folder.resolve(fileName);
             Files.copy(in, filePath, StandardCopyOption.REPLACE_EXISTING);
 
