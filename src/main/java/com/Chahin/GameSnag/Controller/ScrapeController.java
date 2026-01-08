@@ -23,8 +23,8 @@ public class ScrapeController {
     @GetMapping
     public void scrape() throws IOException, InterruptedException {
         // testing
-        //epicGamesScraper.scrapeEpicGames();
+        epicGamesScraper.scrapeEpicGames();
 
-        steamGamesScraper.scrape();
+        //steamGamesScraper.scrape();
     }
 }

@@ -43,6 +43,11 @@ public class EpicGamesScraper {
 
             // Loop through all games
             for (ElementHandle item : gameItems) {
+                // Game Reference URL
+                StringBuilder referenceURL = new StringBuilder("https://store.epicgames.com");
+                ElementHandle referenceURLDiv = item.querySelector(".css-1k3j1r9");
+                String referenceURLA = referenceURLDiv.getAttribute("href");
+                referenceURL.append(referenceURLA);
 
                 // Get Game Image URL
                 ElementHandle imageDiv = item.querySelector("div.css-uwwqev");
@@ -118,11 +123,13 @@ public class EpicGamesScraper {
                 }
 
                 Game game = new Game(
-                      title,
-                      cleanOriginalPrice,
-                      cleanDiscountPrice,
-                      "Random",
-                      cleanLocalPath
+                        title,
+                        cleanOriginalPrice,
+                        cleanDiscountPrice,
+                        "Random",
+                        cleanLocalPath,
+                        Platform.EPIC,
+                        referenceURL.toString()
                 );
 
                 Game returnedGame = gameSnagService.addGame(game);

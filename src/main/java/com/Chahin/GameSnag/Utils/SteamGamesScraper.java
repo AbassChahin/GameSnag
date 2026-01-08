@@ -33,10 +33,6 @@ public class SteamGamesScraper {
     }
 
     public void scrape() throws IOException, InterruptedException {
-
-        // Add all games scraped to list
-        List<Game> discountedGames = new ArrayList<>();
-
         int page = 1;
         while (true) {
             // link to scrape
@@ -85,6 +81,9 @@ public class SteamGamesScraper {
             for (Element game : games) {
                 // appID
                 String appId = game.attr("data-ds-appid");
+
+                // Reference URL
+                String referenceURL = game.attr("href");
 
                 // game title
                 String title = game.selectFirst(".title").text();
@@ -179,7 +178,9 @@ public class SteamGamesScraper {
                         cleanOriginalPrice,
                         cleanDiscountPrice,
                         "Random",
-                        cleanLocalPath
+                        cleanLocalPath,
+                        Platform.STEAM,
+                        referenceURL
                 );
 
                 Game returnedGame = gameSnagService.addGame(newGame);
@@ -188,10 +189,6 @@ public class SteamGamesScraper {
                 // avoid site blocking IP
                 Thread.sleep(1000); // VERY important
             }
-        }
-
-        for (Game game : discountedGames) {
-            System.out.println(game);
         }
     }
 
