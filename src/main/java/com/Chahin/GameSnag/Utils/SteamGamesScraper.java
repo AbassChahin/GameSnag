@@ -7,20 +7,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.SQLOutput;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class SteamGamesScraper {
@@ -38,14 +34,11 @@ public class SteamGamesScraper {
             // link to scrape
             String url = "https://store.steampowered.com/search/results/" + "?specials=1&cc=us&l=en&infinite=1&category1=998&page=" + page;
 
-            CookieManager cookieManager = new CookieManager();
-            cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-
             HttpClient client = HttpClient.newBuilder()
                     .connectTimeout(Duration.ofSeconds(10))
                     .build();
 
-            // headers for html call
+            // headers for HTML call
             String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
@@ -57,18 +50,16 @@ public class SteamGamesScraper {
             HttpResponse<String> response =
                     client.send(request, HttpResponse.BodyHandlers.ofString());
 
+            // Ensure good response status code
             if (response.statusCode() != 200) {
                 System.out.println("Request failed: " + response.statusCode());
                 break;
             }
 
             // Steam returns JSON with embedded HTML
-            String body = response.body();
-            String html = body.split("\"results_html\":\"", 2)[1]
-                    .split("\",\"pagination\"", 2)[0]
-                    .replace("\\n", "")
-                    .replace("\\\"", "\"")
-                    .replace("\\/", "/");
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(response.body());
+            String html = root.path("results_html").asString();
 
             if (html.trim().isEmpty()) {
                 break;
@@ -170,9 +161,6 @@ public class SteamGamesScraper {
                         appId, title, discount, price, original
                 );
 
-                System.out.println("Fetched page " + page);
-                page++;
-
                 Game newGame = new Game(
                         title,
                         cleanOriginalPrice,
@@ -189,6 +177,9 @@ public class SteamGamesScraper {
                 // avoid site blocking IP
                 Thread.sleep(1000); // VERY important
             }
+
+            System.out.println("Fetched page " + page);
+            page++;
         }
     }
 
