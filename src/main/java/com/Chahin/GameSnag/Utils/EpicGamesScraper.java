@@ -38,9 +38,6 @@ public class EpicGamesScraper {
             ElementHandle gameList = page.querySelector("ul.css-wvo9v4");
             List<ElementHandle> gameItems = gameList.querySelectorAll("li.css-14qz3g4");
 
-            // Add all games scraped to list
-            List<Game> discountedGames = new ArrayList<>();
-
             // Loop through all games
             for (ElementHandle item : gameItems) {
                 // Game Reference URL
@@ -126,20 +123,13 @@ public class EpicGamesScraper {
                         title,
                         cleanOriginalPrice,
                         cleanDiscountPrice,
-                        "Random",
                         cleanLocalPath,
                         Platform.EPIC,
                         referenceURL.toString()
                 );
 
                 Game returnedGame = gameSnagService.addGame(game);
-                System.out.println(returnedGame);
-
-                discountedGames.add(game);
-            }
-
-            for (Game game : discountedGames) {
-                System.out.println(game);
+                System.out.println("[GAME ADDED] - Successful\n" + returnedGame);
             }
         }
     }

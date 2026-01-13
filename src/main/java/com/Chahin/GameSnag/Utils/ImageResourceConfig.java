@@ -21,7 +21,7 @@ public class ImageResourceConfig implements WebMvcConfigurer {
         try {
             Files.createDirectories(imageDirPath);
         } catch (IOException e){
-            throw new RuntimeException("Failed to create image Directory: " + e);
+            throw new RuntimeException("[IMAGE RESOURCE] - Failed - Unable to create Image Directory: " + e);
         }
     }
 

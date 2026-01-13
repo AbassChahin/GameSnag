@@ -59,7 +59,6 @@ public class GameSnagController {
 
         // Update game
         game.setTitle(updatedGame.getTitle());
-        game.setSaleDates(updatedGame.getSaleDates());
         game.setOriginalPrice(updatedGame.getOriginalPrice());
         game.setSalePrice(updatedGame.getSalePrice());
         game.setImagePath(updatedGame.getImagePath());

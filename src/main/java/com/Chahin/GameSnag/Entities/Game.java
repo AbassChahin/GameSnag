@@ -24,9 +24,6 @@ public class Game {
     @Field("SalePrice")
     private double salePrice;
 
-    @Field("SaleDates")
-    private String saleDates;
-
     @Field("ImagePath")
     private String imagePath;
 
@@ -39,22 +36,20 @@ public class Game {
     public Game() {
     }
 
-    public Game(String title, double originalPrice, double salePrice, String saleDates, String imagePath, Platform platform, String referenceURL) {
+    public Game(String title, double originalPrice, double salePrice, String imagePath, Platform platform, String referenceURL) {
         this.title = title;
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
-        this.saleDates = saleDates;
         this.imagePath = imagePath;
         this.platform = platform;
         this.referenceURL = referenceURL;
     }
 
-    public Game(ObjectId _id, String title, double originalPrice, double salePrice, String saleDates, String imagePath, Platform platform, String referenceURL) {
+    public Game(ObjectId _id, String title, double originalPrice, double salePrice, String imagePath, Platform platform, String referenceURL) {
         this._id = _id;
         this.title = title;
         this.originalPrice = originalPrice;
         this.salePrice = salePrice;
-        this.saleDates = saleDates;
         this.imagePath = imagePath;
         this.platform = platform;
         this.referenceURL = referenceURL;
@@ -84,14 +79,6 @@ public class Game {
         this.salePrice = salePrice;
     }
 
-    public String getSaleDates() {
-        return saleDates;
-    }
-
-    public void setSaleDates(String saleDates) {
-        this.saleDates = saleDates;
-    }
-
     public String getImagePath() {return imagePath;}
 
     public void setImagePath(String imagePath) {this.imagePath = imagePath;}
@@ -106,6 +93,6 @@ public class Game {
 
     @Override
     public String toString() {
-        return "Title: " + title + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nSale Dates: " + saleDates + "\nPlatform: " + platform + "\nImage Path: " + imagePath  + "\nReference URL: " + referenceURL;
+        return "Title: " + title + "\nOriginal Price: " + originalPrice + "\nSale Price: " + salePrice + "\nPlatform: " + platform + "\nImage Path: " + imagePath  + "\nReference URL: " + referenceURL;
     }
 }

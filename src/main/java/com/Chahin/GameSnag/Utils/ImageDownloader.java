@@ -9,7 +9,6 @@ import java.nio.file.StandardCopyOption;
 
 public class ImageDownloader {
     public static String downloadImage(String imageUrl, String fileName) {
-
         try (InputStream in = new URI(imageUrl).toURL().openStream()) {
             Path folder = Paths.get("./images/games");
             if (!Files.exists(folder)) {
@@ -20,12 +19,12 @@ public class ImageDownloader {
             Path filePath = folder.resolve(fileName);
             Files.copy(in, filePath, StandardCopyOption.REPLACE_EXISTING);
 
-            System.out.println("Downloaded to: " + filePath.toAbsolutePath());
-
+            System.out.println("[IMAGE DOWNLOAD] - Successful - Downloaded to: " + filePath.toAbsolutePath());
             return filePath.toString();
         } catch (Exception e) {
+            System.out.println("[IMAGE DOWNLOAD] - Failed - File: " + fileName);
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 }

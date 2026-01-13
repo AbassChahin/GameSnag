@@ -30,7 +30,7 @@ public class SteamGamesScraper {
 
     public void scrape() throws IOException, InterruptedException {
         int page = 1;
-        while (true) {
+        while (page <= 100) {
             // link to scrape
             String url = "https://store.steampowered.com/search/results/" + "?specials=1&cc=us&l=en&infinite=1&category1=998&page=" + page;
 
@@ -165,20 +165,19 @@ public class SteamGamesScraper {
                         title,
                         cleanOriginalPrice,
                         cleanDiscountPrice,
-                        "Random",
                         cleanLocalPath,
                         Platform.STEAM,
                         referenceURL
                 );
 
                 Game returnedGame = gameSnagService.addGame(newGame);
-                System.out.println(returnedGame);
+                System.out.println("[GAME ADDED] - Successful\n" + returnedGame);
 
                 // avoid site blocking IP
                 Thread.sleep(1000); // VERY important
             }
 
-            System.out.println("Fetched page " + page);
+            System.out.println("[PAGE FETCH] - Success - Fetched Page " + page);
             page++;
         }
     }

@@ -20,6 +20,31 @@ public class GameSnagService {
 
     // Create
     public Game addGame(Game game) {
+        // Ensure not null
+        if (game == null) {
+            return null;
+        }
+
+        // Title check
+        if (game.getTitle() == null || game.getTitle().isEmpty()) {
+            return null;
+        }
+
+        // Image Path Check
+        if (game.getImagePath() == null || game.getImagePath().isEmpty()) {
+            return null;
+        }
+
+        // Platform check
+        if (game.getPlatform() == null) {
+            return null;
+        }
+
+        // ReferenceURL Check
+        if (game.getReferenceURL() == null || game.getReferenceURL().isEmpty()) {
+            return null;
+        }
+
         return gameSnagRepository.save(game);
     }
 
