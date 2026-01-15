@@ -1,7 +1,6 @@
 package com.Chahin.GameSnag.Service;
 import com.Chahin.GameSnag.Entities.Message;
 import com.Chahin.GameSnag.Repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

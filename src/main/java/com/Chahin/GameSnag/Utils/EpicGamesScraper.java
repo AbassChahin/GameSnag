@@ -3,7 +3,6 @@ package com.Chahin.GameSnag.Utils;
 import com.Chahin.GameSnag.Entities.Game;
 import com.Chahin.GameSnag.Service.GameSnagService;
 import com.microsoft.playwright.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 

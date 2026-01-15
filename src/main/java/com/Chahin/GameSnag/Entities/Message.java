@@ -1,6 +1,5 @@
 package com.Chahin.GameSnag.Entities;
 
-import com.Chahin.GameSnag.Utils.Platform;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
