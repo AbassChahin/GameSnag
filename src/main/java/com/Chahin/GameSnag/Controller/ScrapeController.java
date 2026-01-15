@@ -14,8 +14,6 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/scrape")
 public class ScrapeController {
-
-    @Autowired
     private final ScrapeScheduler scrapeScheduler;
 
     public ScrapeController(ScrapeScheduler scrapeScheduler) {

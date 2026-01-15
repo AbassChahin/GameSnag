@@ -17,10 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1/game")
 public class GameSnagController {
-    @Autowired
     private final GameSnagService gameSnagService;
-
-    @Autowired
     private final MessageService messageService;
 
     public GameSnagController(GameSnagService gameSnagService, MessageService messageService) {

@@ -20,8 +20,6 @@ import java.time.Duration;
 
 @Component
 public class SteamGamesScraper {
-
-    @Autowired
     private final GameSnagService gameSnagService;
 
     public SteamGamesScraper(GameSnagService gameSnagService) {

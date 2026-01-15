@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class GameSnagService {
-
-    @Autowired
     private final GameSnagRepository gameSnagRepository;
 
     public GameSnagService(GameSnagRepository gameSnagRepository) {

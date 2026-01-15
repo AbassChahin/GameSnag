@@ -14,8 +14,6 @@ import java.util.stream.Stream;
 // Clean out old sales + local photos
 @Component
 public class SaleManager {
-
-    @Autowired
     private final MongoTemplate mongoTemplate;
 
     public SaleManager(MongoTemplate mongoTemplate) {

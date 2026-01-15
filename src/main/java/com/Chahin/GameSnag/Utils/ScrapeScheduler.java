@@ -8,12 +8,8 @@ import java.io.IOException;
 
 @Component
 public class ScrapeScheduler {
-
-    @Autowired
     private final EpicGamesScraper epicGamesScraper;
-    @Autowired
     private final SteamGamesScraper steamGamesScraper;
-    @Autowired
     private final SaleManager saleManager;
 
     public ScrapeScheduler(EpicGamesScraper epicGamesScraper, SteamGamesScraper steamGamesScraper, SaleManager saleManager) {

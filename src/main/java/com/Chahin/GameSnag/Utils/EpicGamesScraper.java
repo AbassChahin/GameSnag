@@ -9,9 +9,7 @@ import java.util.List;
 
 @Component
 public class EpicGamesScraper {
-
     // To Save Games to Database
-    @Autowired
     private final GameSnagService gameSnagService;
 
     public EpicGamesScraper(GameSnagService gameSnagService) {
