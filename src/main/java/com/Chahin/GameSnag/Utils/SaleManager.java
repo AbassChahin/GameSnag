@@ -1,9 +1,9 @@
 package com.Chahin.GameSnag.Utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Clean out old sales + local photos
-@Configuration
+@Component
 public class SaleManager {
 
     @Autowired
@@ -30,15 +30,13 @@ public class SaleManager {
                         try {
                             Files.delete(path);
                         } catch (IOException e) {
-                            System.out.println("[FILE DELETION] - Failed - Unable to delete file: " + path);
-                            e.printStackTrace();
+                            System.out.println("[FILE DELETION] - Failed - Unable to delete file: " + path + "\n" + e);
                         }
                     }
             );
             System.out.println("[FILE DELETION] - Successful - All files deleted!");
         } catch (IOException e) {
-            System.out.println("[FILE DELETION] - Failed - Unable to locate files in: " + dir);
-            e.printStackTrace();
+            System.out.println("[FILE DELETION] - Failed - Unable to locate files in: " + dir + "\n" + e);
         }
     }
 

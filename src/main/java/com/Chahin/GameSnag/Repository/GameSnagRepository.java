@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface GameSnagRepository extends MongoRepository<Game, ObjectId> {
     Game findByTitle(String title);
-    Game deleteByTitle(String title);
+    void deleteByTitle(String title);
     List<Game> findBySalePrice(double salePrice);
 }

@@ -5,8 +5,6 @@ import com.Chahin.GameSnag.Service.GameSnagService;
 import com.microsoft.playwright.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -97,11 +95,6 @@ public class EpicGamesScraper {
 
                 // Turn backslashes forward & remove special characters
                 cleanLocalPath = cleanLocalPath.replace("\\", "/");
-
-
-                // Get Game Discount
-                ElementHandle discountEl = item.querySelector("span.eds_1xxntt819");
-                String discount = (discountEl != null) ? discountEl.innerText().trim() : "0%";
 
                 // Get Game Original Price
                 ElementHandle originalPriceEl = item.querySelector("span.css-4jky3p");

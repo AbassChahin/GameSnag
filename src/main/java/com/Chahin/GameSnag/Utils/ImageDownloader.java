@@ -22,8 +22,7 @@ public class ImageDownloader {
             System.out.println("[IMAGE DOWNLOAD] - Successful - Downloaded to: " + filePath.toAbsolutePath());
             return filePath.toString();
         } catch (Exception e) {
-            System.out.println("[IMAGE DOWNLOAD] - Failed - File: " + fileName);
-            e.printStackTrace();
+            System.out.println("[IMAGE DOWNLOAD] - Failed - File: " + fileName + "\n" + e);
         }
         return null;
     }

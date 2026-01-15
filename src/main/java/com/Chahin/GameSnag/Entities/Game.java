@@ -1,5 +1,4 @@
 package com.Chahin.GameSnag.Entities;
-
 import com.Chahin.GameSnag.Utils.Platform;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @TypeAlias("Game")
 @Document(collection = "GameSnag")
 public class Game {
-
     @Id
     @Field("_id")
     private ObjectId _id;

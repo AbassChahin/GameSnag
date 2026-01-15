@@ -11,15 +11,66 @@ import java.util.stream.Collectors;
 @Component
 public class GameSnagService {
 
+    @Autowired
     private final GameSnagRepository gameSnagRepository;
 
-    @Autowired
     public GameSnagService(GameSnagRepository gameSnagRepository) {
         this.gameSnagRepository =  gameSnagRepository;
     }
 
     // Create
     public Game addGame(Game game) {
+        if (checkGameValid(game) == null) {
+            return null;
+        }
+        return gameSnagRepository.save(game);
+    }
+
+    // Read
+    public Game getGameByTitle(String gameName) {
+        return gameSnagRepository.findByTitle(gameName);
+    }
+
+    public List<Game> getAllGames() {
+        return gameSnagRepository.findAll();
+    }
+
+    public List<Game> getSalePrice(double salePrice) {
+        return gameSnagRepository.findAll().stream()
+                .filter(game -> game.getSalePrice() == salePrice)
+                .collect(Collectors.toList());
+    }
+
+    // Update
+    public Game updateGameByTitle(Game updatedGame, String title) {
+        if (checkGameValid(updatedGame) == null) {
+            return null;
+        }
+
+        // Get current game
+        Game prevGame = getGameByTitle(title);
+
+        if (prevGame == null) {
+            return null;
+        }
+
+        prevGame.setTitle(updatedGame.getTitle());
+        prevGame.setOriginalPrice(updatedGame.getOriginalPrice());
+        prevGame.setSalePrice(updatedGame.getSalePrice());
+        prevGame.setPlatform(updatedGame.getPlatform());
+        prevGame.setImagePath(updatedGame.getImagePath());
+        prevGame.setReferenceURL(updatedGame.getReferenceURL());
+        System.out.println("reached");
+        return gameSnagRepository.save(prevGame);
+    }
+
+    // Delete
+    public void deleteGameByTitle(String name) {
+        gameSnagRepository.deleteByTitle(name);
+    }
+
+    // helper method to check valid request body
+    public Game checkGameValid(Game game) {
         // Ensure not null
         if (game == null) {
             return null;
@@ -45,31 +96,6 @@ public class GameSnagService {
             return null;
         }
 
-        return gameSnagRepository.save(game);
-    }
-
-    // Read
-    public Game getGameByTitle(String gameName) {
-        return gameSnagRepository.findByTitle(gameName);
-    }
-
-    public List<Game> getAllGames() {
-        return gameSnagRepository.findAll();
-    }
-
-    public List<Game> getSalePrice(double salePrice) {
-        return gameSnagRepository.findAll().stream()
-                .filter(game -> game.getSalePrice() == salePrice)
-                .collect(Collectors.toList());
-    }
-
-    // Update
-    public Game updateGameByTitle(Game game) {
-        return gameSnagRepository.save(game);
-    }
-
-    // Delete
-    public Game deleteGameByTitle(String name) {
-        return gameSnagRepository.deleteByTitle(name);
+        return game;
     }
 }
