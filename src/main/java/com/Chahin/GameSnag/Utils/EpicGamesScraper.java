@@ -4,15 +4,19 @@ import com.Chahin.GameSnag.Entities.Game;
 import com.Chahin.GameSnag.Service.GameSnagService;
 import com.microsoft.playwright.*;
 import org.springframework.stereotype.Component;
+
+import java.awt.*;
 import java.util.List;
 
 @Component
 public class EpicGamesScraper {
     // To Save Games to Database
     private final GameSnagService gameSnagService;
+    private final ImageDownloader imageDownloader;
 
-    public EpicGamesScraper(GameSnagService gameSnagService) {
+    public EpicGamesScraper(GameSnagService gameSnagService, ImageDownloader imageDownloader) {
         this.gameSnagService = gameSnagService;
+        this.imageDownloader = imageDownloader;
     }
 
     public void scrapeEpicGames() {
@@ -80,18 +84,9 @@ public class EpicGamesScraper {
                 String fileName = cleanTitle + fileExtension;
 
                 // download image locally and get specific path
-                String localPath = ImageDownloader.downloadImage(cleanImageSrc, fileName);
-                String cleanLocalPath = "";
+                String s3Url = imageDownloader.downloadImageAndUploadToS3(cleanImageSrc, fileName);
 
-                if (localPath != null) {
-                    int index = localPath.indexOf("images");
-                    if (index != -1) {
-                        cleanLocalPath = localPath.substring(index);
-                    }
-                }
-
-                // Turn backslashes forward & remove special characters
-                cleanLocalPath = cleanLocalPath.replace("\\", "/");
+                // Send this path to S3Service to upload image to aws
 
                 // Get Game Original Price
                 ElementHandle originalPriceEl = item.querySelector("span.css-4jky3p");
@@ -113,7 +108,7 @@ public class EpicGamesScraper {
                         title,
                         cleanOriginalPrice,
                         cleanDiscountPrice,
-                        cleanLocalPath,
+                        s3Url,
                         Platform.EPIC,
                         referenceURL.toString()
                 );

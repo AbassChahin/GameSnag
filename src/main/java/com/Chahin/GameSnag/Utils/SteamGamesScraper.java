@@ -20,9 +20,11 @@ import java.time.Duration;
 @Component
 public class SteamGamesScraper {
     private final GameSnagService gameSnagService;
+    private final ImageDownloader imageDownloader;
 
-    public SteamGamesScraper(GameSnagService gameSnagService) {
+    public SteamGamesScraper(GameSnagService gameSnagService, ImageDownloader imageDownloader) {
         this.gameSnagService = gameSnagService;
+        this.imageDownloader = imageDownloader;
     }
 
     public void scrape() throws IOException, InterruptedException {
@@ -139,18 +141,7 @@ public class SteamGamesScraper {
                 String fileName = cleanTitle + fileExtension;
 
                 // download image locally and get specific path
-                String localPath = ImageDownloader.downloadImage(cleanImageSrc, fileName);
-                String cleanLocalPath = "";
-
-                if (localPath != null) {
-                    index = localPath.indexOf("images");
-                    if (index != -1) {
-                        cleanLocalPath = localPath.substring(index);
-                    }
-                }
-
-                // Turn backslashes forward & remove special characters
-                cleanLocalPath = cleanLocalPath.replace("\\", "/");
+                String s3Url = imageDownloader.downloadImageAndUploadToS3(cleanImageSrc, fileName);
 
                 // test
                 System.out.printf(
@@ -162,7 +153,7 @@ public class SteamGamesScraper {
                         title,
                         cleanOriginalPrice,
                         cleanDiscountPrice,
-                        cleanLocalPath,
+                        s3Url,
                         Platform.STEAM,
                         referenceURL
                 );

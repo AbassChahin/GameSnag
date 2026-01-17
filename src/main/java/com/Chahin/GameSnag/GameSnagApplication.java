@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+// TODO: Set up process on Oracle VM to run in the background Nginx for front end and Spring program in the backend
+// TODO: Split scheduler / scraping into separate program
+
 @SpringBootApplication(
 		excludeName = {
 			"org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration",

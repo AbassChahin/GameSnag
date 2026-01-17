@@ -40,7 +40,7 @@ public class GameSnagController {
     public Message addMessage(@RequestBody Message message) {
         Message newMessage = messageService.addMessage(message);
         if (newMessage == null) {
-            System.out.println("[POST REQUEST] - Incorrect Message:\n" + newMessage);
+            System.out.println("[POST REQUEST] - Incorrect Message:\nMessage is Null");
         } else {
             System.out.println("[POST REQUEST] - Adding Message:\n" + newMessage);
         }
@@ -109,7 +109,7 @@ public class GameSnagController {
     public ResponseEntity<Game> updateGame(@RequestParam String title, @RequestBody Game updatedGame) {
 
         if (updatedGame == null) {
-            System.out.println("[PUT REQUEST] - Game Failed Updated\n\nBad Request Body Given:\n" + updatedGame);
+            System.out.println("[PUT REQUEST] - Game Failed Updated\n\nBad Request Body Given:\nUpdated Game Is Null");
             return new ResponseEntity<>((HttpHeaders) null, HttpStatus.BAD_REQUEST);
         }
 
@@ -134,7 +134,7 @@ public class GameSnagController {
         Game game = gameSnagService.getGameByTitle(title);
 
         if (game == null) {
-            System.out.println("[DELETE REQUEST] - Game Failed Deletion:\nBad Request Body: " + game);
+            System.out.println("[DELETE REQUEST] - Game Failed Deletion:\nBad Request Body: Game Is Null");
             return new ResponseEntity<>((HttpHeaders) null, HttpStatus.BAD_REQUEST);
         }
 
@@ -148,7 +148,7 @@ public class GameSnagController {
         Message message = messageService.getMessageByName(name);
 
         if (message == null) {
-            System.out.println("[DELETE REQUEST] - Message Failed Deletion:\nBad Request Body: " + message);
+            System.out.println("[DELETE REQUEST] - Message Failed Deletion:\nBad Request Body: Message Is Null");
             return new ResponseEntity<>((HttpHeaders) null, HttpStatus.BAD_REQUEST);
         }
 
@@ -162,7 +162,7 @@ public class GameSnagController {
         Message message = messageService.getMessageByEmail(email);
 
         if (message == null) {
-            System.out.println("[DELETE REQUEST] - Message Failed Deletion:\nBad Request Body: " + message);
+            System.out.println("[DELETE REQUEST] - Message Failed Deletion:\nBad Request Body: Message Is Null");
             return new ResponseEntity<>((HttpHeaders) null, HttpStatus.BAD_REQUEST);
         }
 

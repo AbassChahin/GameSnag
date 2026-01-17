@@ -5,7 +5,6 @@ import com.Chahin.GameSnag.Repository.GameSnagRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class GameSnagService {
@@ -30,12 +29,6 @@ public class GameSnagService {
 
     public List<Game> getAllGames() {
         return gameSnagRepository.findAll();
-    }
-
-    public List<Game> getSalePrice(double salePrice) {
-        return gameSnagRepository.findAll().stream()
-                .filter(game -> game.getSalePrice() == salePrice)
-                .collect(Collectors.toList());
     }
 
     // Update
