@@ -1,4 +1,4 @@
-GameSnag
+GameSnag - https://gamesnag.duckdns.org/
 
 GameSnag is a Java Spring Boot application with a HTML/CSS/JS frontend that scrapes game sales from multiple websites and consolidates them into a single, easy-to-browse platform. It provides a unified view of discounted games across different stores, making it easy for users to find the best deals.
 
