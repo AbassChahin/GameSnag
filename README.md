@@ -12,6 +12,8 @@ Features
 Technology Stack
 - Backend: Java, Spring Boot
 - Frontend: HTML, CSS, JavaScript
+- Database: MongoDB Atlas
+- Image Hosting: Amazon S3 Bucket
 - Data fetching: Web scraping with Java libraries (e.g., Jsoup, Playwright for Java)
 - Server: Runs on an Oracle Cloud VM with Linux OS. The frontend is served by Nginx on the VM and the backend is run in the VM.
 - Logging: Output redirected to output.log when run in background
