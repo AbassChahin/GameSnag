@@ -1,4 +1,4 @@
-GameSnag - http://gamesnag.duckdns.org/
+GameSnag - https://gamesnag.duckdns.org/
 
 GameSnag is a Java Spring Boot application with a HTML/CSS/JS frontend that scrapes game sales from multiple websites and consolidates them into a single, easy-to-browse platform. It provides a unified view of discounted games across different stores, making it easy for users to find the best deals.
 
@@ -15,7 +15,7 @@ Technology Stack
 - Database: MongoDB Atlas
 - Image Hosting: Amazon S3 Bucket
 - Data fetching: Web scraping with Java libraries (e.g., Jsoup, Playwright for Java)
-- Server: Runs on an Oracle Cloud VM with Linux OS. The frontend is served by Nginx on the VM and the backend is run in the VM.
+- Server: Runs on a local Linux Server. The frontend is served by Nginx on the server and the backend is run in the server.
 - Logging: Output redirected to output.log when run in background
 
 Prerequisites
@@ -33,7 +33,7 @@ API
 The backend exposes a REST API that provides game sale data in JSON format. You can use it to fetch games programmatically, filter by platform, store, or price, or integrate with other applications.
 
 Base URL
-- http://129.153.133.78:8080/api/v1/game/
+- https://gamesnag.duckdns.org//api/v1/game/
 
 API Endpoints
 - GET base_url + allgames - Returns all games on sale currently
